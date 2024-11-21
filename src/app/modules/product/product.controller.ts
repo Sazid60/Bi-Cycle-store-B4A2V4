@@ -23,6 +23,7 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
+
 // get all products or searched products
 
 // here  Promise<void> is used to say that it will return nothing
@@ -53,7 +54,6 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
       message: 'Got products successfully',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).json({
       message: 'No Data Found',
@@ -62,7 +62,29 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
     });
   }
 };
+
+//  get a single product
+
+const getSingleProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const result = await ProductService.getSingleProductFromDB(productId);
+    res.status(200).json({
+      success: true,
+      message: 'Got The Expected Product',
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      message: 'No Data Found',
+      success: false,
+      error: err,
+    });
+  }
+};
+
 export const ProductController = {
   createProduct,
   getProducts,
+  getSingleProduct,
 };

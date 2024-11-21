@@ -30,8 +30,15 @@ const getAllSearchedProductsFromDB = async (searchTerm: string) => {
   // console.log(result);
   return result;
 };
+
+// get single product from db
+const getSingleProductFromDB = async (productId: string) => {
+  const result = await ProductModel.findById(productId);
+  return result;
+};
 export const ProductService = {
   createProductInDB,
   getAllProductsFromDB,
   getAllSearchedProductsFromDB,
+  getSingleProductFromDB,
 };
