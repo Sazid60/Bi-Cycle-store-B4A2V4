@@ -104,7 +104,7 @@ const updateProduct = async (req: Request, res: Response) => {
 };
 
 // delete a product
-const deleteProduct = async (req: Request, res: Response) => {
+const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { productId } = req.params;
     const result = await ProductService.deleteProductFromDB(productId);
