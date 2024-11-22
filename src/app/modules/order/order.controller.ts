@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
 import { OrderService } from './order.service';
 import { ProductModel } from '../product/product.model';
+import { ProductService } from '../product/product.service';
 
 // create a product
 const createOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
     // console.log(orderData);
-    const product = await ProductModel.findById(orderData.product);
+    const product = await ProductService.getSingleProductFromDB(
+      orderData.product,
+    );
     if (!product) {
       res.status(404).json({
         message: 'Product is Not Found',
@@ -27,7 +30,7 @@ const createOrder = async (req: Request, res: Response) => {
         data: result,
       });
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     // console.log(err);
     res.status(500).json({
       message: 'Validation Failed',

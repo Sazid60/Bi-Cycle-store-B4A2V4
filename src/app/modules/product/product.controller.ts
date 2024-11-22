@@ -13,7 +13,7 @@ const createProduct = async (req: Request, res: Response) => {
       message: 'Bicycle created successfully',
       data: result,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     // console.log(err);
     res.status(500).json({
       message: 'Validation Failed',
@@ -55,9 +55,9 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
         data: result,
       });
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
-      message: 'No Data Found',
+      message: 'Validation Error',
       status: false,
       error: err,
     });
@@ -82,9 +82,9 @@ const getSingleProduct = async (req: Request, res: Response) => {
         data: result,
       });
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
-      message: 'No Data Found',
+      message: 'Validation Error',
       status: false,
       error: err,
     });
@@ -116,9 +116,9 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
         data: result,
       });
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
-      message: 'No Data Found',
+      message: 'Validation Error',
       status: false,
       error: err,
     });
@@ -144,9 +144,9 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
         data: {},
       });
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
-      message: 'No Data Found',
+      message: 'Validation Error',
       status: false,
       error: err,
     });
