@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { OrderService } from './order.service';
-import { ProductModel } from '../product/product.model';
 import { ProductService } from '../product/product.service';
 
 // create a product
@@ -14,19 +13,19 @@ const createOrder = async (req: Request, res: Response) => {
     if (!product) {
       res.status(404).json({
         message: 'Product is Not Found',
-        success: false,
+        status: false,
       });
     } else if (product.quantity < orderData.quantity) {
       // console.log(product.quantity, orderData.quantity);
       res.status(400).json({
         message: 'Insufficient Stock',
-        success: false,
+        status: false,
       });
     } else {
       const result = await OrderService.createAnOrderInDB(orderData);
       res.status(200).json({
-        success: true,
-        message: 'Order Created Successfully',
+        message: 'Order Created successfully',
+        status: true,
         data: result,
       });
     }
@@ -34,7 +33,25 @@ const createOrder = async (req: Request, res: Response) => {
     // console.log(err);
     res.status(500).json({
       message: 'Validation Failed',
-      success: false,
+      status: false,
+      error: err,
+    });
+  }
+};
+
+// get revenue from the order
+const getRevenue = async (req: Request, res: Response) => {
+  try {
+    const result = await OrderService.getRevenueFromDB();
+    res.status(200).json({
+      message: 'Revenue Obtained',
+      status: true,
+      data: result,
+    });
+  } catch (err: unknown) {
+    res.status(500).json({
+      message: 'Validation Failed',
+      status: false,
       error: err,
     });
   }
@@ -42,4 +59,5 @@ const createOrder = async (req: Request, res: Response) => {
 
 export const OrderController = {
   createOrder,
+  getRevenue,
 };
