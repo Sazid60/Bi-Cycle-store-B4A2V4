@@ -8,8 +8,8 @@ const createProduct = async (req: Request, res: Response) => {
     // Calling Service Function To Create a product
     const result = await ProductService.createProductInDB(productData);
     res.status(200).json({
-      success: true,
       message: 'Bicycle created successfully',
+      success: true,
       data: result,
     });
   } catch (err: any) {
@@ -47,7 +47,7 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
       });
     } else {
       res.status(200).json({
-        message: 'Got products successfully',
+        message: 'Bicycles retrieved successfully',
         status: true,
         data: result,
       });

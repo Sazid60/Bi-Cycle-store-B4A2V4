@@ -15,7 +15,7 @@ BI-CYCLE-STORE is a backend project built on express.js,mongodb, mongoose and ty
 #### CREATE A PRODUCT
 
 **ENDPOINT URL** : **`/api/products`**
-**METHOD** : `GET`
+**METHOD** : `POST`
 **Body Data**:
 
 ```json
@@ -33,17 +33,84 @@ BI-CYCLE-STORE is a backend project built on express.js,mongodb, mongoose and ty
 - Hit this Url and set the data in the body the product will be created
 - Full URL format
 
-  ```bash
+```bash
   https://bi-cycle-store-b4-a2-v4.vercel.app/api/products
-  ```
+```
 
+- This will also add creation time
 - If any data field is missing it will show error message since all the fields are made required
 
-#### CREATE A PRODUCT
+#### GET ALL THE PRODUCTS
 
 **ENDPOINT URL** : **`/api/products`**
 **METHOD** : `GET`
-**Body Data**:
+
+- Hit this link in postman for finding all the product data in database
+
+```bash
+https://bi-cycle-store-b4-a2-v4.vercel.app/api/products
+```
+
+- Hit this link to get specific category data base on name, brand, type. This will take the searchTerm and match with those fields of data and give the data relevant to the searchTerm
+
+```bash
+https://bi-cycle-store-b4-a2-v4.vercel.app/api/products?searchTerm=Mountain
+```
+
+- Here search term can be anything
+- Regex is used to partially match any thing that is searched
+
+#### GET A PRODUCT
+
+**ENDPOINT URL** : **`/api/products/:productId`**
+**METHOD** : `GET`
+
+- Hit this link with the desired productId to get specific product
+
+```bash
+https://bi-cycle-store-b4-a2-v4.vercel.app/api/products/6740bf78d95e6dd49804f02e
+```
+
+- Here the id is not fixed add your own desired id to get result. and this is just an example
+
+#### UPDATE A PRODUCT
+
+**ENDPOINT URL** : **`/api/products/:productId`**
+**METHOD** : `PUT`
+
+- Hit this url with the desired id and the desired parameter in the body that we want to update
+- This will return the desired updated output
+
+```bash
+https://bi-cycle-store-b4-a2-v4.vercel.app/api/products/6740bf78d95e6dd49804f02e
+```
+
+- Update parameter body
+
+```json
+{
+  "price": 350,
+  "quantity": 15
+}
+```
+
+- This will record the updating time as well
+- As put method is used this will take partial parameter to update, like if we add any one of all field this will update the specific data.
+
+#### DELETE A PRODUCT
+
+**ENDPOINT URL** : **`/api/products/:productId`**
+**METHOD** : `DELETE`
+
+- If we want to delete the specific data we have to hit this link with desired it.
+
+```bash
+https://bi-cycle-store-b4-a2-v4.vercel.app/api/products/6740c2eb2e09631f60bf7b53
+```
+
+- hit with the desired id, this id is not fixed
+
+- This will completely delete the product from the database.
 
 ### Installation Steps
 
