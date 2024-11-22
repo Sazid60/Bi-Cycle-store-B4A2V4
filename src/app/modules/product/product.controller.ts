@@ -41,18 +41,20 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
       result = await ProductService.getAllProductsFromDB();
     }
 
+    // checks the if the result contains empty array
     if (result.length === 0) {
       res.status(404).json({
         message: 'No products found',
         status: true,
         data: [],
       });
+    } else {
+      res.status(200).json({
+        message: 'Got products successfully',
+        status: true,
+        data: result,
+      });
     }
-    res.status(200).json({
-      message: 'Got products successfully',
-      status: true,
-      data: result,
-    });
   } catch (err: any) {
     res.status(500).json({
       message: 'No Data Found',
@@ -68,11 +70,18 @@ const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const result = await ProductService.getSingleProductFromDB(productId);
-    res.status(200).json({
-      message: 'Bicycle retrieved successfully',
-      status: true,
-      data: result,
-    });
+    if (!result) {
+      res.status(404).json({
+        message: 'Product not found',
+        status: false,
+      });
+    } else {
+      res.status(200).json({
+        message: 'Bicycle retrieved successfully',
+        status: true,
+        data: result,
+      });
+    }
   } catch (err: any) {
     res.status(500).json({
       message: 'No Data Found',
@@ -84,16 +93,29 @@ const getSingleProduct = async (req: Request, res: Response) => {
 
 // update a product
 
-const updateProduct = async (req: Request, res: Response) => {
+const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { productId } = req.params;
-    const updates = req.body;
-    const result = await ProductService.updateAProductInDB(productId, updates);
-    res.status(200).json({
-      message: 'Bicycle updated successfully',
-      status: true,
-      data: result,
-    });
+
+    const product = await ProductService.getSingleProductFromDB(productId);
+
+    if (!product) {
+      res.status(404).json({
+        message: 'Product not found',
+        status: false,
+      });
+    } else {
+      const updates = req.body;
+      const result = await ProductService.updateAProductInDB(
+        productId,
+        updates,
+      );
+      res.status(200).json({
+        message: 'Bicycle updated successfully',
+        status: true,
+        data: result,
+      });
+    }
   } catch (err: any) {
     res.status(500).json({
       message: 'No Data Found',
@@ -110,18 +132,18 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     const result = await ProductService.deleteProductFromDB(productId);
 
     if (!result) {
-      return res.status(404).json({
+      res.status(404).json({
         message: 'Product not found',
         status: false,
         data: {},
       });
+    } else {
+      res.status(200).json({
+        message: 'Bicycle deleted successfully',
+        status: true,
+        data: {},
+      });
     }
-
-    res.status(200).json({
-      message: 'Bicycle deleted successfully',
-      status: true,
-      data: {},
-    });
   } catch (err: any) {
     res.status(500).json({
       message: 'No Data Found',
