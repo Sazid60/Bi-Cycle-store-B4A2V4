@@ -13,7 +13,6 @@ const createProduct = async (req: Request, res: Response) => {
       message: 'Bicycle created successfully',
       data: result,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     // console.log(err);
     res.status(500).json({
@@ -44,20 +43,20 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
 
     if (result.length === 0) {
       res.status(404).json({
-        success: false,
         message: 'No products found',
+        status: true,
         data: [],
       });
     }
     res.status(200).json({
-      success: true,
       message: 'Got products successfully',
+      status: true,
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       message: 'No Data Found',
-      success: false,
+      status: false,
       error: err,
     });
   }
@@ -70,21 +69,42 @@ const getSingleProduct = async (req: Request, res: Response) => {
     const { productId } = req.params;
     const result = await ProductService.getSingleProductFromDB(productId);
     res.status(200).json({
-      success: true,
-      message: 'Got The Expected Product',
+      message: 'Bicycle retrieved successfully',
+      status: true,
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       message: 'No Data Found',
-      success: false,
+      status: false,
       error: err,
     });
   }
 };
 
+// update a product
+
+const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const updates = req.body;
+    const result = await ProductService.updateAProductInDB(productId, updates);
+    res.status(200).json({
+      message: 'Bicycle updated successfully',
+      status: true,
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      message: 'No Data Found',
+      status: false,
+      error: err,
+    });
+  }
+};
 export const ProductController = {
   createProduct,
   getProducts,
   getSingleProduct,
+  updateProduct,
 };

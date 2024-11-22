@@ -12,4 +12,6 @@ router.get('/products', ProductController.getProducts);
 // get a single product
 router.get('/products/:productId', ProductController.getSingleProduct);
 
+// updating a product
+router.put('/products/:productId', ProductController.updateProduct);
 export const ProductRoutes = router;
