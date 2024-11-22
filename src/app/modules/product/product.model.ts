@@ -30,6 +30,7 @@ const productSchema = new Schema<TProduct>(
     quantity: {
       type: Number,
       required: [true, 'Quantity Is Required'],
+      min: [0, 'Quantity must be a positive number'],
     },
     inStock: {
       type: Boolean,

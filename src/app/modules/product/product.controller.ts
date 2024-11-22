@@ -12,11 +12,12 @@ const createProduct = async (req: Request, res: Response) => {
       message: 'Bicycle created successfully',
       data: result,
     });
-  } catch (err: unknown) {
+  } catch (err: any) {
     res.status(500).json({
       message: 'Validation Failed',
       success: false,
       error: err,
+      stack: err.stack,
     });
   }
 };
@@ -51,11 +52,12 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
         data: result,
       });
     }
-  } catch (err: unknown) {
+  } catch (err: any) {
     res.status(500).json({
       message: 'Validation Error',
       status: false,
       error: err,
+      stack: err.stack,
     });
   }
 };
@@ -80,11 +82,12 @@ const getSingleProduct = async (req: Request, res: Response) => {
         data: result,
       });
     }
-  } catch (err: unknown) {
+  } catch (err: any) {
     res.status(500).json({
       message: 'Validation Error',
       status: false,
       error: err,
+      stack: err.stack,
     });
   }
 };
@@ -115,11 +118,12 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
         data: result,
       });
     }
-  } catch (err: unknown) {
+  } catch (err: any) {
     res.status(500).json({
       message: 'Validation Error',
       status: false,
       error: err,
+      stack: err.stack,
     });
   }
 };
@@ -144,11 +148,12 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
         data: {},
       });
     }
-  } catch (err: unknown) {
+  } catch (err: any) {
     res.status(500).json({
       message: 'Validation Error',
       status: false,
       error: err,
+      stack: err.stack,
     });
   }
 };

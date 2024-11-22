@@ -8,26 +8,28 @@ BI-CYCLE-STORE is a backend project built on express.js,mongodb, mongoose and ty
 
 - [BI-CYCLE-STORE](https://bi-cycle-store-b4-a2-v4.vercel.app/)
 
-### Project Operation Steps
+### PROJECT OPERATION STEPS
 
 - As it is a backend project and there is no frontend, you have to use the postman to check the outcomes.
 
-#### Create a Product
+#### CREATE A PRODUCT
 
-- **ENDPOINT URL** : **`/api/products`**
-- **METHOD** : `GET`
-- **Body Data**:
-  ```json
-  {
-    "name": "Roadster 5000",
-    "brand": "SpeedX",
-    "price": 300,
-    "type": "Road",
-    "description": "A premium road bike designed for speed and performance.",
-    "quantity": 20,
-    "inStock": true
-  }
-  ```
+**ENDPOINT URL** : **`/api/products`**
+**METHOD** : `GET`
+**Body Data**:
+
+```json
+{
+  "name": "Roadster 5000",
+  "brand": "SpeedX",
+  "price": 300,
+  "type": "Road",
+  "description": "A premium road bike designed for speed and performance.",
+  "quantity": 20,
+  "inStock": true
+}
+```
+
 - Hit this Url and set the data in the body the product will be created
 - Full URL format
 
@@ -36,6 +38,12 @@ BI-CYCLE-STORE is a backend project built on express.js,mongodb, mongoose and ty
   ```
 
 - If any data field is missing it will show error message since all the fields are made required
+
+#### CREATE A PRODUCT
+
+**ENDPOINT URL** : **`/api/products`**
+**METHOD** : `GET`
+**Body Data**:
 
 ### Installation Steps
 
