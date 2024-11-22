@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
 import { ProductService } from './product.service';
 
-// create a product
+// 1. Create a product
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData = req.body;
-    // console.log(productData);
-    // service function will be called from here
+    // Calling Service Function To Create a product
     const result = await ProductService.createProductInDB(productData);
     res.status(200).json({
       success: true,
@@ -14,7 +13,6 @@ const createProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: unknown) {
-    // console.log(err);
     res.status(500).json({
       message: 'Validation Failed',
       success: false,
@@ -23,21 +21,19 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-// get all products or searched products
-
-// here  Promise<void> is used to say that it will return nothing
+// 2. Get all products or searched products
 const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const { searchTerm } = req.query;
-    // console.log(searchTerm);
 
     let result;
     if (searchTerm) {
+      // Calling Service Function To get searched data
       result = await ProductService.getAllSearchedProductsFromDB(
         searchTerm as string,
       );
-      // console.log(result);
     } else {
+      // Calling Service Function To Get All Products Data
       result = await ProductService.getAllProductsFromDB();
     }
 
@@ -64,12 +60,14 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-//  get a single product
+// 3. Get a single product
 
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
+    // Calling Service Function To Get Single Product
     const result = await ProductService.getSingleProductFromDB(productId);
+    // checks if the product exists in the the database or not
     if (!result) {
       res.status(404).json({
         message: 'Product not found',
@@ -91,12 +89,12 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
-// update a product
+// 4.Update a product
 
 const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { productId } = req.params;
-
+    // Calling Service Function To search for the expected product that is supposed to be updated
     const product = await ProductService.getSingleProductFromDB(productId);
 
     if (!product) {
@@ -106,6 +104,7 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
       });
     } else {
       const updates = req.body;
+      // Calling Service Function To Update a Product
       const result = await ProductService.updateAProductInDB(
         productId,
         updates,
@@ -125,10 +124,11 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// delete a product
+// 5.Delete a product
 const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { productId } = req.params;
+    // Calling Service Function To Delete a Product
     const result = await ProductService.deleteProductFromDB(productId);
 
     if (!result) {

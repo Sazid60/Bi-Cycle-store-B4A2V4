@@ -1,3 +1,5 @@
+// This Type checks the type of the data
+
 export type TProduct = {
   name: string;
   brand: string;

@@ -2,11 +2,11 @@ import { Request, Response } from 'express';
 import { OrderService } from './order.service';
 import { ProductService } from '../product/product.service';
 
-// create a product
+// 1. create an order
 const createOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
-    // console.log(orderData);
+    // Calling Service Function To Create an order
     const product = await ProductService.getSingleProductFromDB(
       orderData.product,
     );
@@ -16,7 +16,6 @@ const createOrder = async (req: Request, res: Response) => {
         status: false,
       });
     } else if (product.quantity < orderData.quantity) {
-      // console.log(product.quantity, orderData.quantity);
       res.status(400).json({
         message: 'Insufficient Stock',
         status: false,
@@ -30,7 +29,6 @@ const createOrder = async (req: Request, res: Response) => {
       });
     }
   } catch (err: unknown) {
-    // console.log(err);
     res.status(500).json({
       message: 'Validation Failed',
       status: false,
@@ -39,9 +37,10 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-// get revenue from the order
+// 2. get revenue from the order
 const getRevenue = async (req: Request, res: Response) => {
   try {
+    // Calling Service Function To Get Revenue
     const result = await OrderService.getRevenueFromDB();
     res.status(200).json({
       message: 'Revenue Obtained',

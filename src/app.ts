@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 // application routes
+
 app.use('/api', ProductRoutes);
 app.use('/api', OrderRoutes);
 

@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { TOrder } from './order.interface';
 
+// Creating a Schema corresponding to the document interface.
+
 const orderSchema = new Schema<TOrder>(
   {
     email: {

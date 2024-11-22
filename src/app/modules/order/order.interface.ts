@@ -1,3 +1,4 @@
+// Type for Checking order types
 export type TOrder = {
   email: string;
   product: string;

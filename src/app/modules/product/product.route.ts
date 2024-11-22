@@ -2,7 +2,7 @@ import express from 'express';
 import { ProductController } from './product.controller';
 const router = express.Router();
 
-// will call controller function
+// Calling controller function from route
 // create a product
 router.post('/products', ProductController.createProduct);
 

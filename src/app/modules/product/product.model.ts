@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { TProduct } from './product.interface';
 
-// Create a Schema corresponding to the document interface.
+// Creating a Schema corresponding to the document interface.
 
 const productSchema = new Schema<TProduct>(
   {
@@ -40,5 +40,5 @@ const productSchema = new Schema<TProduct>(
   // this is used to record time when it is created
 );
 
-// Create a Model.
+// Creating a Model.
 export const ProductModel = model<TProduct>('Product', productSchema);
