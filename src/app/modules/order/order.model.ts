@@ -27,7 +27,7 @@ const orderSchema = new Schema<TOrder>(
     },
     totalPrice: {
       type: Number,
-      required: [true, 'Total Is Needed'],
+      required: false,
     },
   },
   { timestamps: true },

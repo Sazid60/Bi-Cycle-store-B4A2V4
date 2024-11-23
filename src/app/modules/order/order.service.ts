@@ -7,22 +7,26 @@ const createAnOrderInDB = async (orderData: TOrder) => {
   const productDetails = await ProductModel.findById(orderData.product);
 
   if (!productDetails) {
-    throw new Error('Product not found');
+    throw new Error('Product Not Found');
   }
-
-  const updatedQuantity: number = productDetails.quantity - orderData.quantity;
-  // this is the logic for decreasing the quantity and changing status while order is placed
-  await ProductModel.findByIdAndUpdate(
-    orderData.product,
-    {
-      $inc: { quantity: -orderData.quantity },
-      $set: { inStock: updatedQuantity > 0 },
-    },
-    { new: true },
-  );
 
   const totalPrice: number = productDetails.price * orderData.quantity;
   const result = await OrderModel.create({ ...orderData, totalPrice });
+
+  if (result) {
+    const updatedQuantity: number =
+      productDetails.quantity - orderData.quantity;
+
+    // this is the logic for decreasing the quantity and changing status while order is placed
+    await ProductModel.findByIdAndUpdate(
+      orderData.product,
+      {
+        $inc: { quantity: updatedQuantity },
+        $set: { inStock: updatedQuantity > 0 },
+      },
+      { new: true },
+    );
+  }
   return result;
 };
 
