@@ -37,7 +37,8 @@ const productSchema = new Schema<TProduct>(
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
+
   // this is used to record time when it is created
 );
 
