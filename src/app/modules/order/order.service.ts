@@ -21,8 +21,8 @@ const createAnOrderInDB = async (orderData: TOrder) => {
     await ProductModel.findByIdAndUpdate(
       orderData.product,
       {
-        $inc: { quantity: updatedQuantity },
-        $set: { inStock: updatedQuantity > 0 },
+        $inc: { quantity: -orderData.quantity },
+        $set: { inStock: updatedQuantity >= 0 },
       },
       { new: true },
     );

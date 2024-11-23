@@ -45,7 +45,7 @@ const getRevenue = async (req: Request, res: Response) => {
     // Calling Service Function To Get Revenue
     const result = await OrderService.getRevenueFromDB();
     res.status(200).json({
-      message: 'Revenue Obtained',
+      message: 'Revenue calculated successfully',
       status: true,
       data: result,
     });

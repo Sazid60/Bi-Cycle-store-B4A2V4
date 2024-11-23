@@ -108,9 +108,59 @@ https://bi-cycle-store-b4-a2-v4.vercel.app/api/products/6740bf78d95e6dd49804f02e
 https://bi-cycle-store-b4-a2-v4.vercel.app/api/products/6740c2eb2e09631f60bf7b53
 ```
 
-- hit with the desired id, this id is not fixed
+- Hit with the desired id, this id is not fixed
 
 - This will completely delete the product from the database.
+
+#### PLACE AN ORDER
+
+**ENDPOINT URL** : **`/api/orders`**
+**METHOD** : `POST`
+
+- This will place an order if we hit this route with the body data
+
+```bash
+https://bi-cycle-store-b4-a2-v4.vercel.app/api/orders
+```
+
+- Body Data :
+
+```json
+{
+  "email": "customer@examle.com",
+  "product": "6740bf78d95e6dd49804f02e",
+  "quantity": 32,
+  "totalPrice": 40 // here the totalPrice is kept optional
+}
+```
+
+- Here the total price is optional. Its added or not added in body does not matter system will automatically provide according to the quantity and unit price
+- In product: the id of the product saved to look for the product while calculating totalPrice and Revenue.
+
+#### GENERATE REVENUE
+
+**ENDPOINT URL** : **`/api/orders/revenue`**
+**METHOD** : `GET`
+
+- To get the revenue based on the orders hit this link
+
+```bash
+https://bi-cycle-store-b4-a2-v4.vercel.app/api/orders/revenue
+```
+
+- This will do aggregation going through all the documents and grabbing the total price.
+
+#### WHAT EXTRA DOES THIS PROJECT OFFERS
+
+- Type protection using typescript
+- Mongoose Data Protection for validating Unwanted Data or Missing Data
+
+### TECHNOLOGY used
+
+- Typescript
+- Mongoose
+- MongoDB
+- Express.js
 
 ### Installation Steps
 
