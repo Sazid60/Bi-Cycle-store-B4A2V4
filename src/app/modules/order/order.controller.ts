@@ -6,7 +6,7 @@ import { ProductService } from '../product/product.service';
 const createOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
-    // Calling Service Function To Create an order
+    // checking if the product exists in database or not
     const product = await ProductService.getSingleProductFromDB(
       orderData.product,
     );
@@ -21,6 +21,7 @@ const createOrder = async (req: Request, res: Response) => {
         status: false,
       });
     } else {
+      // Calling Service Function To Create an order
       const result = await OrderService.createAnOrderInDB(orderData);
       res.status(200).json({
         message: 'Order Created successfully',
@@ -28,11 +29,12 @@ const createOrder = async (req: Request, res: Response) => {
         data: result,
       });
     }
-  } catch (err: unknown) {
+  } catch (err: any) {
     res.status(500).json({
       message: 'Validation Failed',
       status: false,
       error: err,
+      stack: err.stack,
     });
   }
 };
@@ -47,11 +49,12 @@ const getRevenue = async (req: Request, res: Response) => {
       status: true,
       data: result,
     });
-  } catch (err: unknown) {
+  } catch (err: any) {
     res.status(500).json({
       message: 'Validation Failed',
       status: false,
       error: err,
+      stack: err.stack,
     });
   }
 };
