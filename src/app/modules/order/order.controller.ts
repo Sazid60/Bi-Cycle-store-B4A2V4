@@ -33,7 +33,7 @@ const createOrder = async (req: Request, res: Response) => {
     res.status(500).json({
       message: 'Validation Failed',
       status: false,
-      error: err,
+      error: err.errors,
       stack: err.stack,
     });
   }
@@ -51,7 +51,7 @@ const getRevenue = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     res.status(500).json({
-      message: 'Validation Failed',
+      message: 'Something went Wrong!',
       status: false,
       error: err,
       stack: err.stack,

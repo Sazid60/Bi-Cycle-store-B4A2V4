@@ -16,7 +16,7 @@ const createProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       message: 'Validation Failed',
       success: false,
-      error: err,
+      error: err.errors,
       stack: err.stack,
     });
   }
@@ -54,9 +54,9 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
     }
   } catch (err: any) {
     res.status(500).json({
-      message: 'Validation Error',
+      message: 'Something Went Wrong !',
       status: false,
-      error: err,
+      error: err.errors,
       stack: err.stack,
     });
   }
@@ -84,7 +84,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
     }
   } catch (err: any) {
     res.status(500).json({
-      message: 'Validation Error',
+      message: 'Something Went Wrong !',
       status: false,
       error: err,
       stack: err.stack,
@@ -122,7 +122,7 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({
       message: 'Validation Error',
       status: false,
-      error: err,
+      error: err.errors,
       stack: err.stack,
     });
   }
