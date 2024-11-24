@@ -22,7 +22,7 @@ const createAnOrderInDB = async (orderData: TOrder) => {
       orderData.product,
       {
         $inc: { quantity: -orderData.quantity },
-        $set: { inStock: updatedQuantity >= 0 },
+        $set: { inStock: updatedQuantity > 0 },
       },
       { new: true },
     );

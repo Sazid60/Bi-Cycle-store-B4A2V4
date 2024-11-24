@@ -150,7 +150,7 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     }
   } catch (err: any) {
     res.status(500).json({
-      message: 'Validation Error',
+      message: 'Something Went Wrong',
       status: false,
       error: err,
       stack: err.stack,
